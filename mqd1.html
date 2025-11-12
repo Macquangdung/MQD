@@ -1,0 +1,1032 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAKERY SHOP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Geist', sans-serif;
+        }
+        .bg-primary {
+            background-color: #8BC34A; 
+        }
+        .text-primary {
+            color: #8BC34A;
+        }
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.03);
+        }
+        .price {
+            color: #e53e3e; 
+            font-weight: 600;
+        }
+       .product-radio { display: none; }
+        /* Bánh kem */
+        #kem0:checked ~ .kem-grid { display: grid; }
+        #kem0:checked ~ .kem-details .kem-detail { display: none; }
+        #kem1:checked ~ .kem-grid, #kem2:checked ~ .kem-grid, #kem3:checked ~ .kem-grid, #kem4:checked ~ .kem-grid, #kem5:checked ~ .kem-grid, #kem6:checked ~ .kem-grid, #kem7:checked ~ .kem-grid, #kem8:checked ~ .kem-grid { display: none; }
+        #kem1:checked ~ .kem-details #kem-detail1 { display: block; }
+        #kem2:checked ~ .kem-details #kem-detail2 { display: block; }
+        #kem3:checked ~ .kem-details #kem-detail3 { display: block; }
+        #kem4:checked ~ .kem-details #kem-detail4 { display: block; }
+        #kem5:checked ~ .kem-details #kem-detail5 { display: block; }
+        #kem6:checked ~ .kem-details #kem-detail6 { display: block; }
+        #kem7:checked ~ .kem-details #kem-detail7 { display: block; }
+        #kem8:checked ~ .kem-details #kem-detail8 { display: block; }
+        .kem-detail { display: none; }
+        /* Bánh ngọt */
+        #ngot0:checked ~ .ngot-grid { display: grid; }
+        #ngot0:checked ~ .ngot-details .ngot-detail { display: none; }
+        #ngot1:checked ~ .ngot-grid, #ngot2:checked ~ .ngot-grid, #ngot3:checked ~ .ngot-grid, #ngot4:checked ~ .ngot-grid, #ngot5:checked ~ .ngot-grid, #ngot6:checked ~ .ngot-grid, #ngot7:checked ~ .ngot-grid, #ngot8:checked ~ .ngot-grid, #ngot9:checked ~ .ngot-grid, #ngot10:checked ~ .ngot-grid { display: none; }
+        #ngot1:checked ~ .ngot-details #ngot-detail1 { display: block; }
+        #ngot2:checked ~ .ngot-details #ngot-detail2 { display: block; }
+        #ngot3:checked ~ .ngot-details #ngot-detail3 { display: block; }
+        #ngot4:checked ~ .ngot-details #ngot-detail4 { display: block; }
+        #ngot5:checked ~ .ngot-details #ngot-detail5 { display: block; }
+        #ngot6:checked ~ .ngot-details #ngot-detail6 { display: block; }
+        #ngot7:checked ~ .ngot-details #ngot-detail7 { display: block; }
+        #ngot8:checked ~ .ngot-details #ngot-detail8 { display: block; }
+        #ngot9:checked ~ .ngot-details #ngot-detail9 { display: block; }
+        #ngot10:checked ~ .ngot-details #ngot-detail10 { display: block; }
+        .ngot-detail { display: none; }
+        /* Bánh quy */
+        #quy0:checked ~ .quy-grid { display: grid; }
+        #quy0:checked ~ .quy-details .quy-detail { display: none; }
+        #quy1:checked ~ .quy-grid, #quy2:checked ~ .quy-grid, #quy3:checked ~ .quy-grid, #quy4:checked ~ .quy-grid, #quy5:checked ~ .quy-grid, #quy6:checked ~ .quy-grid, #quy7:checked ~ .quy-grid { display: none; }
+        #quy1:checked ~ .quy-details #quy-detail1 { display: block; }
+        #quy2:checked ~ .quy-details #quy-detail2 { display: block; }
+        #quy3:checked ~ .quy-details #quy-detail3 { display: block; }
+        #quy4:checked ~ .quy-details #quy-detail4 { display: block; }
+        #quy5:checked ~ .quy-details #quy-detail5 { display: block; }
+        #quy6:checked ~ .quy-details #quy-detail6 { display: block; }
+        #quy7:checked ~ .quy-details #quy-detail7 { display: block; }
+        .quy-detail { display: none; }
+        /* Detail card style */
+        .detail-card {
+            max-width: 400px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+            padding: 32px 24px;
+            text-align: center;
+            position: relative;
+        }
+        .detail-card img {
+            width: 260px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            background: #f8fafc;
+            box-shadow: 0 2px 8px rgba(140,195,74,0.08);
+            padding: 12px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .detail-card .back-btn {
+            position: absolute;
+            left: 16px;
+            top: 16px;
+            background: #f3f3f3;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            color: #8BC34A;
+            transition: background 0.2s;
+        }
+        .detail-card .back-btn:hover {
+            background: #e0e0e0;
+        }
+        .buy-btn {
+            margin-top: 24px;
+            background: #8BC34A;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 32px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-right: 10px;
+        }
+        .buy-btn:hover {
+            background: #689f38;
+        }
+        .add-cart-btn {
+            margin-top: 24px;
+            background: #fff;
+            color: #8BC34A;
+            border: 2px solid #8BC34A;
+            border-radius: 8px;
+            padding: 12px 32px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .add-cart-btn:hover {
+            background: #f3f3f3;
+            color: #689f38;
+        }
+
+        
+        /* Ẩn tất cả các section danh mục, sau đó chỉ hiện lại section đang được chọn */
+        body:has(.product-radio:checked:not([id$="0"])) > section.category-section {
+            display: none;
+        }
+        body:has(.product-radio:checked:not([id$="0"])) > section.category-section:has(.product-radio:checked) {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-stone-50">
+<body id="mqd1-page" class="bg-stone-50">
+    <header class="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
+        <div class="container mx-auto flex h-16 items-center justify-between px-4">
+            <a href="mqd.html" class="flex items-center space-x-2">
+                <span class="text-2xl font-bold text-[#8BC34A]">BAKERY SHOP</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="gioithieu.html" class="text-sm font-medium hover:text-[#8BC34A] transition-colors">
+                    Giới thiệu
+                </a>
+                <a href="mqd1.html" class="text-sm font-medium hover:text-[#8BC34A] transition-colors">
+                    Sản phẩm
+                </a>
+                <a href="tintuc.html" class="text-sm font-medium hover:text-[#8BC34A] transition-colors">
+                    Tin tức
+                </a>
+                <a href="dangnhap.html" class="text-sm font-medium hover:text-[#8BC34A] transition-colors">
+                    Đăng nhập
+                </a>
+                <a href="danhgia.html" class="text-sm font-medium hover:text-[#8BC34A] transition-colors">
+                    Đánh giá
+                </a>
+            </nav>
+<div class="flex items-center space-x-4">
+                <input id="searchInput" type="text" placeholder="Nhập tên bánh..." class="border rounded px-2 py-1 mr-2 focus:outline-none focus:ring-2 focus:ring-[#8BC34A] transition" style="width: 180px;">
+                <button id="searchBtn" class="p-2 hover:bg-gray-100 rounded-full transition-colors" title="Tìm kiếm">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </button>
+                <a href="giohang.html" class="p-2 hover:bg-gray-100 rounded-full transition-colors relative inline-block">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                    <span class="cart-count absolute -top-1 -right-1 h-4 w-4 rounded-full bg-red-500 text-[10px] font-bold text-white flex items-center justify-center">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="banner-carousel">
+        <a href="https://www.figma.com/design/3phe4xZitJBFNLuEK2TUNR/banner?node-id=0-1&t=ZVVgYviPSUoW3TJb-1">
+            <img src="media/banner.png" alt="banner 1" loading="lazy">
+        </a>
+        <a href="https://www.figma.com/design/3phe4xZitJBFNLuEK2TUNR/banner?node-id=0-1&t=ZVVgYviPSUoW3TJb-1">
+            <img src="media/banner1.jpg" alt="banner 2" loading="lazy">
+        </a>
+    </div>
+    <style>
+        .banner-carousel {
+            position: relative;
+            width: 100%;
+            height: auto; 
+            overflow: hidden;
+        }
+        .banner-carousel a {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            animation: banner-fade 10s infinite;
+        }
+        .banner-carousel a:nth-child(1) {
+            animation-delay: 0s;
+            position: relative; 
+        }
+        .banner-carousel a:nth-child(2) {
+            animation-delay: 5s;
+            position: absolute; 
+        }
+        .banner-carousel a img {
+            width: 100%;
+            height: auto; 
+            object-fit: unset; 
+            display: block; 
+        }
+        @keyframes banner-fade {
+            0% { opacity: 1; }  
+            40% { opacity: 1; } 
+            50% { opacity: 0; } 
+            100% { opacity: 0; }
+        }
+    </style>
+    <!-- Bánh kem -->
+    <section id="kem" class="category-section kem py-16 bg-stone-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-display font-bold text-gray-900 border-b-2 border-primary inline-block pb-2">Bánh kem</h2>
+            </div>
+            <input type="radio" name="kem" id="kem0" class="product-radio" checked>
+            <input type="radio" name="kem" id="kem1" class="product-radio"><input type="radio" name="kem" id="kem2" class="product-radio"><input type="radio" name="kem" id="kem3" class="product-radio"><input type="radio" name="kem" id="kem4" class="product-radio"><input type="radio" name="kem" id="kem5" class="product-radio"><input type="radio" name="kem" id="kem6" class="product-radio"><input type="radio" name="kem" id="kem7" class="product-radio"><input type="radio" name="kem" id="kem8" class="product-radio">
+            <div class="kem-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <label for="kem1" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+        <img src="media/2.jpg" alt="Bánh kem nhỏ" class="w-full h-48 object-cover object-center">
+        <div class="p-4">
+            <p class="text-gray-900 font-medium mb-1">Bánh kem nhỏ</p>
+            <p class="price">250.000đ</p>
+        </div>
+    </label>
+    <label for="kem2" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+        <img src="media/3.jpg" alt="Bánh kem lớn" class="w-full h-48 object-cover object-center">
+        <div class="p-4">
+            <p class="text-gray-900 font-medium mb-1">Bánh kem lớn</p>
+            <p class="price">450.000đ</p>
+        </div>
+    </label>
+    <label for="kem3" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+        <img src="media/35.jpg" alt="Bánh gato" class="w-full h-48 object-cover object-center">
+        <div class="p-4">
+            <p class="text-gray-900 font-medium mb-1">Bánh gato</p>
+            <p class="price">80.000đ</p>
+        </div>
+    </label>
+    <label for="kem4" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+        <img src="media/36.jpg" alt="Bánh tiramisu" class="w-full h-48 object-cover object-center">
+        <div class="p-4">
+            <p class="text-gray-900 font-medium mb-1">Bánh tiramisu</p>
+            <p class="price">70.000đ</p>
+        </div>
+    </label>
+    <label for="kem5" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+        <img src="media/1.jpg" alt="Bánh kem nấm" class="w-full h-48 object-cover object-center">
+        <div class="p-4">
+            <p class="text-gray-900 font-medium mb-1">Bánh kem nấm</p>
+            <p class="price">120.000đ</p>
+        </div>
+    </label>
+    <label for="kem6" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+        <img src="media/14.jpg" alt="Bánh kem dâu" class="w-full h-48 object-cover object-center">
+        <div class="p-4">
+            <p class="text-gray-900 font-medium mb-1">Bánh kem dâu</p>
+            <p class="price">180.000đ</p>
+        </div>
+    </label>
+    <label for="kem7" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+        <img src="media/15.jpg" alt="Bánh kem socola" class="w-full h-48 object-cover object-center">
+        <div class="p-4">
+            <p class="text-gray-900 font-medium mb-1">Bánh kem socola</p>
+            <p class="price">200.000đ</p>
+        </div>
+    </label>
+    <label for="kem8" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+        <img src="media/16.jpg" alt="Bánh kem caramel" class="w-full h-48 object-cover object-center">
+        <div class="p-4">
+            <p class="text-gray-900 font-medium mb-1">Bánh kem caramel</p>
+            <p class="price">210.000đ</p>
+        </div>
+    </label>
+</div>
+            <div class="kem-details">
+                <div class="kem-detail detail-card" id="kem-detail1">
+                    <label for="kem0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/2.jpg" alt="Bánh kem nhỏ">
+                    <h3 class="text-xl font-bold mb-2">Bánh kem nhỏ</h3>
+                    <p class="mb-4">Bánh kem nhỏ với lớp kem mỏng, ngọt ngào, phù hợp cho các bữa ăn nhẹ.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">250.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-kem1" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-kem1" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="kem-detail detail-card" id="kem-detail2">
+                    <label for="kem0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/3.jpg" alt="Bánh kem lớn">
+                    <h3 class="text-xl font-bold mb-2">Bánh kem lớn</h3>
+                    <p class="mb-4">Bánh kem lớn cho các dịp đặc biệt, với thiết kế đẹp mắt và hương vị tuyệt vời.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">450.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-kem2" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-kem2" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="kem-detail detail-card" id="kem-detail3">
+                    <label for="kem0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/35.jpg" alt="Bánh gato">
+                    <h3 class="text-xl font-bold mb-2">Bánh gato</h3>
+                    <p class="mb-4">Bánh gato bông xốp, kem tươi, cho ngày đặc biệt.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">80.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-kem3" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-kem3" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="kem-detail detail-card" id="kem-detail4">
+                    <label for="kem0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/36.jpg" alt="Bánh tiramisu">
+                    <h3 class="text-xl font-bold mb-2">Bánh tiramisu</h3>
+                    <p class="mb-4">Bánh tiramisu Ý, cà phê và mascarpone thơm ngon.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">70.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-kem4" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-kem4" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="kem-detail detail-card" id="kem-detail5">
+                    <label for="kem0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/1.jpg" alt="Bánh kem nấm">
+                    <h3 class="text-xl font-bold mb-2">Bánh kem nấm</h3>
+                    <p class="mb-4">Bánh kem hình nấm với nhân kem thơm ngon, phù hợp cho các bữa tiệc nhỏ.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">120.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-kem5" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-kem5" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="kem-detail detail-card" id="kem-detail6">
+                    <label for="kem0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/14.jpg" alt="Bánh kem dâu">
+                    <h3 class="text-xl font-bold mb-2">Bánh kem dâu</h3>
+                    <p class="mb-4">Bánh kem dâu tây tươi, vị ngọt thanh, trang trí đẹp mắt.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">180.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-kem6" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-kem6" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="kem-detail detail-card" id="kem-detail7">
+                    <label for="kem0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/15.jpg" alt="Bánh kem socola">
+                    <h3 class="text-xl font-bold mb-2">Bánh kem socola</h3>
+                    <p class="mb-4">Bánh kem socola đậm vị, trang trí sang trọng, thích hợp làm quà tặng.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">200.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-kem7" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-kem7" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="kem-detail detail-card" id="kem-detail8">
+                    <label for="kem0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/16.jpg" alt="Bánh kem caramel">
+                    <h3 class="text-xl font-bold mb-2">Bánh kem caramel</h3>
+                    <p class="mb-4">Bánh kem caramel mềm mịn, vị ngọt dịu, phù hợp mọi lứa tuổi.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">210.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-kem8" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-kem8" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Bánh ngọt -->
+    <section id="ngot" class="category-section ngot py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-display font-bold text-gray-900 border-b-2 border-primary inline-block pb-2">Bánh ngọt</h2>
+            </div>
+            <input type="radio" name="ngot" id="ngot0" class="product-radio" checked>
+            <input type="radio" name="ngot" id="ngot1" class="product-radio"><input type="radio" name="ngot" id="ngot2" class="product-radio"><input type="radio" name="ngot" id="ngot3" class="product-radio"><input type="radio" name="ngot" id="ngot4" class="product-radio"><input type="radio" name="ngot" id="ngot5" class="product-radio"><input type="radio" name="ngot" id="ngot6" class="product-radio"><input type="radio" name="ngot" id="ngot7" class="product-radio"><input type="radio" name="ngot" id="ngot8" class="product-radio"><input type="radio" name="ngot" id="ngot9" class="product-radio"><input type="radio" name="ngot" id="ngot10" class="product-radio">
+            <div class="ngot-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <label for="ngot1" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+                    <img src="media/4.jpg" alt="Bánh bông lan" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-900 font-medium mb-1">Bánh bông lan</p>
+<p class="price">90.000đ</p>
+                    </div>
+                </label>
+                <label for="ngot2" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+                    <img src="media/5.jpg" alt="Bánh vòng (Donut)" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-900 font-medium mb-1">Bánh vòng (Donut)</p>
+<p class="price">35.000đ</p>
+                    </div>
+                </label>
+                <label for="ngot3" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+                    <img src="media/6.jpg" alt="Bánh mì nướng" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-900 font-medium mb-1">Bánh mì nướng</p>
+<p class="price">45.000đ</p>
+<div class="mt-2 flex flex-col gap-2">
+</div>
+                    </div>
+                </label>
+                <label for="ngot4" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+                    <img src="media/40.jpg" alt="Bánh bao" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-900 font-medium mb-1">Bánh bao</p>
+<p class="price">25.000đ</p>
+<div class="mt-2 flex flex-col gap-2">
+ 
+</div>
+                    </div>
+                </label>
+                <label for="ngot5" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+                    <img src="media/32.jpg" alt="Bánh mousse" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-900 font-medium mb-1">Bánh mousse</p>
+<p class="price">60.000đ</p>
+<div class="mt-2 flex flex-col gap-2">
+</div>
+                    </div>
+                </label>
+                <label for="ngot6" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+                    <img src="media/33.jpg" alt="Bánh flan" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-900 font-medium mb-1">Bánh flan</p>
+<p class="price">25.000đ</p>
+<div class="mt-2 flex flex-col gap-2">
+</div>
+                    </div>
+                </label>
+                <label for="ngot7" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+                    <img src="media/34.jpg" alt="Bánh su kem" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-900 font-medium mb-1">Bánh su kem</p>
+<p class="price">20.000đ</p>
+<div class="mt-2 flex flex-col gap-2">
+</div>
+                    </div>
+                </label>
+                <label for="ngot8" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+                    <img src="media/31.jpg" alt="Bánh cupcake" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-900 font-medium mb-1">Bánh cupcake</p>
+<p class="price">30.000đ</p>
+<div class="mt-2 flex flex-col gap-2">
+
+</div>
+                    </div>
+                </label>
+                <label for="ngot9" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+                    <img src="media/30.jpg" alt="Bánh tart" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-900 font-medium mb-1">Bánh tart</p>
+<p class="price">50.000đ</p>
+<div class="mt-2 flex flex-col gap-2">
+</div>
+                    </div>
+                </label>
+                <label for="ngot10" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+                    <img src="media/37.jpg" alt="Bánh macaron" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-900 font-medium mb-1">Bánh macaron</p>
+<p class="price">10.000đ</p>
+<div class="mt-2 flex flex-col gap-2">
+ 
+</div>
+                    </div>
+                </label>
+            </div>
+            <div class="ngot-details">
+                <div class="ngot-detail detail-card" id="ngot-detail1">
+                    <label for="ngot0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/4.jpg" alt="Bánh bông lan">
+                    <h3 class="text-xl font-bold mb-2">Bánh bông lan</h3>
+                    <p class="mb-4">Bánh bông lan mềm mịn, thơm ngon, phù hợp cho mọi lứa tuổi.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">90.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-ngot1" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-ngot1" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="ngot-detail detail-card" id="ngot-detail2">
+                    <label for="ngot0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/5.jpg" alt="Bánh vòng (Donut)">
+                    <h3 class="text-xl font-bold mb-2">Bánh vòng (Donut)</h3>
+                    <p class="mb-4">Bánh vòng giòn tan bên ngoài, mềm bên trong, với nhiều vị topping.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">35.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-ngot2" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-ngot2" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="ngot-detail detail-card" id="ngot-detail3">
+                    <label for="ngot0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/6.jpg" alt="Bánh mì nướng">
+                    <h3 class="text-xl font-bold mb-2">Bánh mì nướng</h3>
+                    <p class="mb-4">Bánh mì nướng vàng giòn, kết hợp với bơ và mật ong.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">45.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-ngot3" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-ngot3" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="ngot-detail detail-card" id="ngot-detail4">
+                    <label for="ngot0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/40.jpg" alt="Bánh bao">
+                    <h3 class="text-xl font-bold mb-2">Bánh bao</h3>
+                    <p class="mb-4">Bánh bao hấp mềm, nhân thịt hoặc rau củ, truyền thống Á Đông.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">25.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-ngot4" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-ngot4" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="ngot-detail detail-card" id="ngot-detail5">
+                    <label for="ngot0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/32.jpg" alt="Bánh mousse">
+                    <h3 class="text-xl font-bold mb-2">Bánh mousse</h3>
+                    <p class="mb-4">Bánh mousse nhẹ nhàng, kem mịn, hương vị tinh tế.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">60.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-ngot5" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-ngot5" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="ngot-detail detail-card" id="ngot-detail6">
+                    <label for="ngot0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/33.jpg" alt="Bánh flan">
+                    <h3 class="text-xl font-bold mb-2">Bánh flan</h3>
+                    <p class="mb-4">Bánh flan caramel mịn, ngọt ngào, truyền thống.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">25.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-ngot6" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-ngot6" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="ngot-detail detail-card" id="ngot-detail7">
+                    <label for="ngot0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/34.jpg" alt="Bánh su kem">
+                    <h3 class="text-xl font-bold mb-2">Bánh su kem</h3>
+                    <p class="mb-4">Bánh su kem Pháp, vỏ giòn, nhân kem tươi ngon.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">20.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-ngot7" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-ngot7" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="ngot-detail detail-card" id="ngot-detail8">
+                    <label for="ngot0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/31.jpg" alt="Bánh cupcake">
+                    <h3 class="text-xl font-bold mb-2">Bánh cupcake</h3>
+                    <p class="mb-4">Bánh cupcake với nhân kem và topping đẹp mắt.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">30.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-ngot8" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-ngot8" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="ngot-detail detail-card" id="ngot-detail9">
+                    <label for="ngot0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/30.jpg" alt="Bánh tart">
+                    <h3 class="text-xl font-bold mb-2">Bánh tart</h3>
+                    <p class="mb-4">Bánh tart với vỏ giòn, nhân trái cây tươi ngon.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">50.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-ngot9" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-ngot9" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="ngot-detail detail-card" id="ngot-detail10">
+                    <label for="ngot0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/37.jpg" alt="Bánh macaron">
+                    <h3 class="text-xl font-bold mb-2">Bánh macaron</h3>
+                    <p class="mb-4">Bánh macaron Pháp, vỏ giòn, nhân kem đa dạng.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">10.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-ngot10" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-ngot10" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Bánh quy -->
+    <section id="quy" class="category-section quy py-16 bg-stone-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-display font-bold text-gray-900 border-b-2 border-primary inline-block pb-2">Bánh quy</h2>
+            </div>
+            <input type="radio" name="quy" id="quy0" class="product-radio" checked>
+            <input type="radio" name="quy" id="quy1" class="product-radio"><input type="radio" name="quy" id="quy2" class="product-radio"><input type="radio" name="quy" id="quy3" class="product-radio"><input type="radio" name="quy" id="quy4" class="product-radio"><input type="radio" name="quy" id="quy5" class="product-radio"><input type="radio" name="quy" id="quy6" class="product-radio"><input type="radio" name="quy" id="quy7" class="product-radio">
+            <div class="quy-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <label for="quy1" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+                    <img src="media/29.jpg" alt="Bánh quy" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-900 font-medium mb-1">Bánh quy</p>
+<p class="price">15.000đ</p>
+<div class="mt-2 flex flex-col gap-2">
+</div>
+                    </div>
+                </label>
+                <label for="quy2" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+                    <img src="media/30.jpg" alt="Bánh tart" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-900 font-medium mb-1">Bánh tart</p>
+<p class="price">50.000đ</p>
+<div class="mt-2 flex flex-col gap-2">
+</div>
+                    </div>
+                </label>
+                <label for="quy3" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+                    <img src="media/38.jpg" alt="Bánh quy bơ" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-900 font-medium mb-1">Bánh quy bơ</p>
+<p class="price">18.000đ</p>
+<div class="mt-2 flex flex-col gap-2">
+</div>
+                    </div>
+                </label>
+                <label for="quy4" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+                    <img src="media/39.jpg" alt="Bánh quy hạnh nhân" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-900 font-medium mb-1">Bánh quy hạnh nhân</p>
+<p class="price">22.000đ</p>
+<div class="mt-2 flex flex-col gap-2">
+</div>
+                    </div>
+                </label>
+                <label for="quy5" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+                    <img src="media/41.jpg" alt="Bánh quy chocolate" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-900 font-medium mb-1">Bánh quy chocolate</p>
+<p class="price">20.000đ</p>
+<div class="mt-2 flex flex-col gap-2">
+</div>
+                    </div>
+                </label>
+                <label for="quy6" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+                    <img src="media/42.jpg" alt="Bánh quy mè đen" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-900 font-medium mb-1">Bánh quy mè đen</p>
+<p class="price">17.000đ</p>
+<div class="mt-2 flex flex-col gap-2">
+</div>
+                    </div>
+                </label>
+                <label for="quy7" class="bg-white rounded-lg overflow-hidden shadow-lg hover-scale text-center cursor-pointer block">
+                    <img src="media/44.jpg" alt="Bánh quy dừa" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <p class="text-gray-900 font-medium mb-1">Bánh quy dừa</p>
+<p class="price">19.000đ</p>
+<div class="mt-2 flex flex-col gap-2">
+  
+</div>
+                    </div>
+                </label>
+            </div>
+            <div class="quy-details">
+                <div class="quy-detail detail-card" id="quy-detail1">
+                    <label for="quy0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/29.jpg" alt="Bánh quy">
+                    <h3 class="text-xl font-bold mb-2">Bánh quy</h3>
+                    <p class="mb-4">Bánh quy giòn tan, dễ ăn, phù hợp cho trẻ em.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">15.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-quy1" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-quy1" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="quy-detail detail-card" id="quy-detail2">
+                    <label for="quy0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/30.jpg" alt="Bánh tart">
+                    <h3 class="text-xl font-bold mb-2">Bánh tart</h3>
+                    <p class="mb-4">Bánh tart với vỏ giòn, nhân trái cây tươi ngon.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">50.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-quy2" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-quy2" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="quy-detail detail-card" id="quy-detail3">
+                    <label for="quy0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/38.jpg" alt="Bánh quy bơ">
+                    <h3 class="text-xl font-bold mb-2">Bánh quy bơ</h3>
+                    <p class="mb-4">Bánh quy bơ thơm, mềm, vị ngọt dịu, thích hợp dùng trà.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">18.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-quy3" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-quy3" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="quy-detail detail-card" id="quy-detail4">
+                    <label for="quy0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/39.jpg" alt="Bánh quy hạnh nhân">
+                    <h3 class="text-xl font-bold mb-2">Bánh quy hạnh nhân</h3>
+                    <p class="mb-4">Bánh quy hạnh nhân giòn, vị bùi, bổ dưỡng.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">22.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-quy4" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-quy4" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="quy-detail detail-card" id="quy-detail5">
+                    <label for="quy0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/41.jpg" alt="Bánh quy chocolate">
+                    <h3 class="text-xl font-bold mb-2">Bánh quy chocolate</h3>
+                    <p class="mb-4">Bánh quy chocolate đậm vị, giòn tan, hấp dẫn trẻ nhỏ.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">20.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-quy5" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-quy5" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="quy-detail detail-card" id="quy-detail6">
+                    <label for="quy0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/42.jpg" alt="Bánh quy mè đen">
+                    <h3 class="text-xl font-bold mb-2">Bánh quy mè đen</h3>
+                    <p class="mb-4">Bánh quy mè đen thơm, giòn, tốt cho sức khỏe.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">17.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-quy6" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-quy6" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="quy-detail detail-card" id="quy-detail7">
+                    <label for="quy0" class="back-btn" title="Quay lại">&#8592;</label>
+                    <img src="media/44.jpg" alt="Bánh quy dừa">
+                    <h3 class="text-xl font-bold mb-2">Bánh quy dừa</h3>
+                    <p class="mb-4">Bánh quy dừa giòn, thơm vị dừa tự nhiên, thích hợp ăn vặt.</p>
+                    <div class="mt-4">
+                        <p class="price text-2xl mb-4">19.000đ</p>
+                        <div class="flex items-center justify-center space-x-3 mb-6">
+                            <label for="qty-quy7" class="text-sm font-medium text-gray-700">Số lượng:</label>
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">-</button>
+                            <input type="number" id="qty-quy7" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md">
+                            <button class="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300">+</button>
+                        </div>
+                        <a href="muahang.html"><button class="buy-btn">Mua</button></a>
+                        <a href="giohang.html"><button class="add-cart-btn">Thêm vào giỏ hàng</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <footer class="bg-gray-900 text-white py-12 mt-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="col-span-2 md:col-span-1">
+                    <img src="media/loo.jpg" alt="Bakery Logo" class="w-16 h-16 mb-4 rounded-full">
+                    <p class="text-xl font-bold mb-4">BAKERY SHOP</p>
+                    <div class="flex gap-4">
+                        <a href="https://www.facebook.com/TaiBakeryShophi/?locale=vi_VN" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24h11.496v-9.294H9.692v-3.622h3.129V8.404c0-3.1 1.894-4.785 4.658-4.785 1.325 0 2.472.098 2.8.142v3.23l-1.918.001c-1.502 0-1.792.715-1.792 1.777v2.333h3.621l-.47 3.622h-3.15V24h6.071c.732 0 1.325-.593 1.325-1.325V1.325C24 .593 23.407 0 22.675 0z"/></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c6.627 0 12 5.373 12 12s-5.373 12-12 12S0 18.627 0 12 5.373 0 12 0zm5.723 18.47a4.996 4.996 0 01-3.64.915 5.002 5.002 0 01-4.832-3.87 4.998 4.998 0 01-.194-2.822v-.002a5 5 0 015.021-4.912c.003 0 .006 0 .009 0h.019c.002 0 .004 0 .006 0a5 5 0 014.821 4.91c0 1.737-.872 3.327-2.31 4.257zM12.008 7.001a5.002 5.002 0 00-4.997 4.997v.002a5.001 5.001 0 004.997 4.997 5.001 5.001 0 004.997-4.999 5.001 5.001 0 00-4.997-4.997z"/></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.048 0C5.408 0 0 5.408 0 12.048c0 6.635 5.408 12.048 12.048 12.048 6.635 0 12.048-5.413 12.048-12.048C24.096 5.408 18.683 0 12.048 0zm6.92 14.887c-.12 1.34-1.34 2.37-3.078 2.417-2.288.106-7.85-2.26-7.85-2.26s-1.045-3.02-1.045-4.81c0-1.848.74-2.828 2.08-2.828 1.487 0 1.95.897 1.95 2.247v1.86c0 1.34.897 2.155 2.155 2.155s2.155-.815 2.155-2.155v-1.86c0-1.35.463-2.247 1.95-2.247 1.34 0 2.08.98 2.08 2.828 0 1.79-.815 3.475-1.045 4.81-.23.47-1.15.545-1.15.545z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h6 class="text-lg font-semibold mb-4 text-primary">Về chúng tôi</h6>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="mqd.html" class="hover:text-white transition-colors">Trang chủ</a></li>
+                        <li><a href="gioithieu.html" class="hover:text-white transition-colors">Giới thiệu</a></li>
+                        <li><a href="mqd1.html" class="hover:text-white transition-colors">Sản phẩm</a></li>
+                        <li><a href="tintuc.html" class="hover:text-white transition-colors">Tin tức</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-primary">Danh Mục</h3>
+                    <ul class="space-y-2">
+                        <li><a href="mqd1.html#kem" class="text-gray-400 hover:text-white transition-colors">Bánh Kem</a></li>
+                        <li><a href="mqd1.html#ngot" class="text-gray-400 hover:text-white transition-colors">Bánh Ngọt</a></li>
+                        <li><a href="mqd1.html#quy" class="text-gray-400 hover:text-white transition-colors">Bánh Quy</a></li>
+                        <li><a href="mqd.html#sp" class="text-gray-400 hover:text-white transition-colors">Sản phẩm nổi bật</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-2 md:col-span-1">
+                    <h6 class="text-lg font-semibold mb-4 text-primary">Tải ứng dụng</h6>
+                    <a href="#" class="inline-block"><img src="media/ggpl.png" alt="Google Play" class="h-12 w-auto"></a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-6 text-center text-gray-400">
+                <p>&copy; 2024 BAKERY SHOP. Phiên bản 1.7.7</p>
+                <div class="mt-2 text-sm space-x-4">
+                    <a href="#!" class="hover:text-white transition-colors">Sự nghiệp</a>
+                    <a href="#!" class="hover:text-white transition-colors">Quyền lợi khách hàng</a>
+                    <span class="text-red-500 font-semibold block sm:inline-block">Liên hệ chúng tôi 1900 1234</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+<script>
+function getSearchKeyword() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('search') || '';
+}
+function normalize(str) {
+  return str
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd');
+}
+function filterProducts(keyword) {
+  // Bánh kem
+  document.querySelectorAll('.kem-grid label').forEach(label => {
+    const name = label.querySelector('p.text-gray-900')?.innerText || '';
+    if (!keyword || normalize(name).includes(normalize(keyword))) {
+      label.style.display = '';
+    } else {
+      label.style.display = 'none';
+    }
+  });
+  // Bánh ngọt
+  document.querySelectorAll('.ngot-grid label').forEach(label => {
+    const name = label.querySelector('p.text-gray-900')?.innerText || '';
+    if (!keyword || normalize(name).includes(normalize(keyword))) {
+      label.style.display = '';
+    } else {
+      label.style.display = 'none';
+    }
+  });
+  // Bánh quy
+  document.querySelectorAll('.quy-grid label').forEach(label => {
+    const name = label.querySelector('p.text-gray-900')?.innerText || '';
+    if (!keyword || normalize(name).includes(normalize(keyword))) {
+      label.style.display = '';
+    } else {
+      label.style.display = 'none';
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', function() {
+  const keyword = getSearchKeyword();
+  filterProducts(keyword);
+});
+</script>
+<script>
+  // Khi nhấn nút tìm kiếm hoặc Enter, chuyển hướng sang trang tìm kiếm với từ khóa
+  function goToSearch() {
+    const keyword = document.getElementById('searchInput').value.trim();
+    if (keyword) {
+      window.location.href = 'mqd1.html?search=' + encodeURIComponent(keyword);
+    }
+  }
+  document.getElementById('searchBtn').addEventListener('click', goToSearch);
+  document.getElementById('searchInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      goToSearch();
+    }
+  });
+</script>
+<script src="script.js"></script>
+</body>
+</html>

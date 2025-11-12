@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAKERY SHOP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Geist', sans-serif;
+        }
+        .bg-primary {
+            background-color: #8BC34A;
+        }
+        .text-primary {
+            color: #8BC34A;
+        }
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        /* Tùy chỉnh nhẹ cho banner giới thiệu */
+        .about-hero {
+            background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%); /* Gradient xanh nhạt */
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #8BC34A; /* Green-500 */
+            border-radius: 2px;
+        }
+        .value-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .value-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(139, 195, 74, 0.3), 0 4px 6px -4px rgba(139, 195, 74, 0.2);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans text-gray-800">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
+      <div class="container mx-auto flex h-16 items-center justify-between px-4">
+        <a href="mqd.html" class="flex items-center space-x-2">
+          <span class="text-2xl font-bold text-[#8BC34A]">BAKERY SHOP</span>
+        </a>
+
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="gioithieu.html" class="text-sm font-medium text-[#8BC34A] transition-colors">
+            Giới thiệu
+          </a>
+          <a href="mqd1.html" class="text-sm font-medium hover:text-[#8BC34A] transition-colors">
+            Sản phẩm
+          </a>
+          <a href="https://tljus.com/" class="text-sm font-medium hover:text-[#8BC34A] transition-colors">
+            Tin tức
+          </a>
+          <a href="dangnhap.html" class="text-sm font-medium hover:text-[#8BC34A] transition-colors">
+            Đăng nhập
+          </a>
+          <a href="danhgia.html" class="text-sm font-medium hover:text-[#8BC34A] transition-colors">
+            Đánh giá
+          </a>
+        </nav>
+
+        <div class="flex items-center space-x-4">
+          <input id="searchInput" type="text" placeholder="Nhập tên bánh..." class="border rounded px-2 py-1 mr-2 focus:outline-none focus:ring-2 focus:ring-[#8BC34A] transition" style="width: 180px;">
+          <button id="searchBtn" class="p-2 hover:bg-gray-100 rounded-full transition-colors" title="Tìm kiếm">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </button>
+          <button class="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+            <span class="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-red-500 text-[10px] font-bold text-white flex items-center justify-center">
+      
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="about-hero pt-20 pb-16 md:py-24 text-center">
+            <div class="container mx-auto px-4">
+                <h1 class="text-6xl font-extrabold text-[#8BC34A] mb-4">Câu Chuyện Chúng Tôi</h1>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                    Bakery Shop – Nơi tình yêu và sự tỉ mỉ được gửi gắm trong từng chiếc bánh.
+                </p>
+                <div class="mt-8">
+                    <a href="#cau-chuyen" class="inline-block px-6 py-2 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-green-600 transition duration-300">
+                        Tìm hiểu thêm
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Story Section -->
+        <section id="cau-chuyen" class="py-16 md:py-24">
+            <div class="container mx-auto px-4">
+                <div class="lg:grid lg:grid-cols-3 lg:gap-12">
+                    
+                    <!-- Sidebar/Image Column -->
+                    <div class="lg:col-span-1 mb-10 lg:mb-0">
+                        <div class="rounded-xl overflow-hidden shadow-2xl sticky top-24">
+                            <img src="https://placehold.co/600x800/f8bbd0/4a4a4a?text=Fresh+Baked+Goods" alt="Hình ảnh các loại bánh tươi" class="w-full h-auto object-cover">
+                        </div>
+                    </div>
+                    
+                    <!-- Content Columns -->
+                    <div class="lg:col-span-2 space-y-12">
+                        
+                        <!-- Story -->
+                        <div class="p-6 md:p-10 bg-gray-50 rounded-xl shadow-lg">
+                            <h2 class="text-3xl font-bold text-gray-900 section-title mb-6">
+                                1. Khởi nguồn: "Bánh tươi mỗi ngày"
+                            </h2>
+                            <p class="text-gray-700 leading-relaxed text-lg">
+                                Thành lập vào tháng **12/2010** từ tình yêu với những chiếc bánh, Bakery Shop khởi nguồn cùng slogan **"Bánh tươi mỗi ngày"** và sứ mệnh xuyên suốt về mang tới những sản phẩm thơm ngon nhất, đảm bảo chất lượng và vệ sinh an toàn thực phẩm.
+                            </p>
+                            <p class="text-gray-700 leading-relaxed text-lg mt-4">
+                                Hàng năm, sản phẩm chủ lực của Fresh Garden là **bánh kem** và **bánh mì tươi**. Trong mỗi dịp lễ hay sinh nhật, bánh kem của Fresh Garden luôn là một trong những lựa chọn hàng đầu, bởi độ ngọt vừa phải, mẫu bánh đẹp, và giá thành hợp lý. Đồng hành mỗi ngày cùng khách hàng là các sản phẩm bánh mì tươi dinh dưỡng, được nướng mới liên tục trong ngày.
+                            </p>
+                        </div>
+
+                        <!-- Development -->
+                        <div class="p-6 md:p-10 bg-white rounded-xl shadow-lg">
+                            <h2 class="text-3xl font-bold text-gray-900 section-title mb-6">
+                                2. Dấu ấn hành trình & Mạng lưới
+                            </h2>
+                            <p class="text-gray-700 leading-relaxed text-lg">
+                                Trải qua một thập kỷ phát triển, Bakery Shop tự hào trở thành thương hiệu bánh tươi uy tín bậc nhất tại Việt Nam.
+                            </p>
+                            <ul class="mt-4 space-y-3 text-gray-700 list-disc list-inside">
+                                <li>**Quy mô:** Hơn **100 cửa hàng và đại lý** phân phối phủ khắp các tỉnh phía Bắc.</li>
+                                <li>**Nhân sự:** Gần **1000 nhân sự** làm việc chăm chỉ, không ngừng sáng tạo.</li>
+                                <li>**Sản xuất:** Dây chuyền sản xuất tiên tiến, hiện đại, đảm bảo chất lượng đồng nhất.</li>
+                            </ul>
+                            <p class="text-gray-700 leading-relaxed text-lg mt-4 font-medium">
+                                Bakery Shop chính là một "thế giới thu nhỏ" của bánh trái, chiều lòng bất kì vị khách nào ghé ngang với sự đa dạng danh bạ Âu - Á, từ bánh ngọt, bánh mặn đến các loại bánh kem phức tạp.
+                            </p>
+                        </div>
+                        
+                        <!-- Video Section -->
+                        <div class="p-6 md:p-10 bg-gray-50 rounded-xl shadow-lg">
+                            <h2 class="text-3xl font-bold text-gray-900 section-title mb-6 text-center w-full">
+                                Video Giới Thiệu
+                            </h2>
+                            <div class="max-w-xl mx-auto rounded-xl overflow-hidden shadow-2xl">
+                                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000;">
+                                    <iframe 
+                                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                                        src="https://www.youtube.com/embed/IWrYtRMg73M?si=DaHPhIkjYIGY6rbs"
+                                        title="Giới thiệu shop bánh" 
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                        allowfullscreen>
+                                    </iframe>
+                                </div>
+                                <p class="mt-0 text-md text-gray-700 text-center p-3 bg-white border-t">
+                                    Ngọt ngào trao yêu thương bắt đầu từ những chiếc bánh
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section id="gia-tri" class="bg-pink-50 py-16 md:py-24">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl font-bold text-gray-900 section-title mb-16">
+                    Giá Trị Cốt Lõi Và Cam Kết
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Card 1 -->
+                    <div class="value-card bg-white p-6 rounded-xl shadow-lg">
+                        <svg class="w-12 h-12 text-[#8BC34A] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944c-3.15.542-5.9 2.518-7.59 5.25C2.69 11.41 2 14.156 2 17c0 3.313 1.343 6 3 6h14c1.657 0 3-2.687 3-6 0-2.844-.69-5.59-2.41-7.794z"/></svg>
+                        <h3 class="text-xl font-semibold mb-3 text-[#8BC34A]">Nguyên liệu cao cấp</h3>
+                        <p class="text-gray-700 text-sm">
+                            Từng sản phẩm Bakery Shop được đầu tư rất kỹ ngay từ khâu chọn nguyên liệu. Chúng tôi sử dụng những thành phần tươi mới nhất từ các nhãn hiệu uy tín quốc tế như **Anchor, Vivo, Meiji, Komplet**.
+                        </p>
+                    </div>
+                    
+                    <!-- Card 2 -->
+                    <div class="value-card bg-white p-6 rounded-xl shadow-lg">
+                        <svg class="w-12 h-12 text-[#8BC34A] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3 1.343 3 3v3a3 3 0 01-6 0v-3c0-1.657 1.343-3 3-3zM7 16h10m1-3l2 2m-2-4l2-2m-10 4l-2 2m2-4l-2-2"/></svg>
+                        <h3 class="text-xl font-semibold mb-3 text-[#8BC34A]">Đa dạng hương vị</h3>
+                        <p class="text-gray-700 text-sm">
+                            Đến với Bakery Shop là đến với hàng trăm hương vị bánh đa chủng loại **Âu - Á**: bánh ngọt, bánh mì tươi, các dòng bánh kem sinh nhật, bánh sự kiện và bánh khô theo mùa.
+                        </p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="value-card bg-white p-6 rounded-xl shadow-lg">
+                        <svg class="w-12 h-12 text-[#8BC34A] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318z"/></svg>
+                        <h3 class="text-xl font-semibold mb-3 text-[#8BC34A]">Sứ mệnh Yêu thương</h3>
+                        <p class="text-gray-700 text-sm">
+                            Sứ mệnh của chúng tôi: Mang đến những sản phẩm đạt chất lượng cao nhất như một **lời tri ân** đối với sự yêu mến và tin dùng của quý khách hàng, xây dựng thói quen thưởng thức bánh ngon mỗi ngày.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="col-span-2 md:col-span-1">
+                    <img src="media/loo.jpg" alt="Bakery Logo" class="w-16 h-16 mb-4 rounded-full">
+                    <p class="text-xl font-bold mb-4">BAKERY SHOP</p>
+                    <div class="flex gap-4">
+                        <a href="https://www.facebook.com/TaiBakeryShophi/?locale=vi_VN" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24h11.496v-9.294H9.692v-3.622h3.129V8.404c0-3.1 1.894-4.785 4.658-4.785 1.325 0 2.472.098 2.8.142v3.23l-1.918.001c-1.502 0-1.792.715-1.792 1.777v2.333h3.621l-.47 3.622h-3.15V24h6.071c.732 0 1.325-.593 1.325-1.325V1.325C24 .593 23.407 0 22.675 0z"/></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c6.627 0 12 5.373 12 12s-5.373 12-12 12S0 18.627 0 12 5.373 0 12 0zm5.723 18.47a4.996 4.996 0 01-3.64.915 5.002 5.002 0 01-4.832-3.87 4.998 4.998 0 01-.194-2.822v-.002a5 5 0 015.021-4.912c.003 0 .006 0 .009 0h.019c.002 0 .004 0 .006 0a5 5 0 014.821 4.91c0 1.737-.872 3.327-2.31 4.257zM12.008 7.001a5.002 5.002 0 00-4.997 4.997v.002a5.001 5.001 0 004.997 4.997 5.001 5.001 0 004.997-4.999 5.001 5.001 0 00-4.997-4.997z"/></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.048 0C5.408 0 0 5.408 0 12.048c0 6.635 5.408 12.048 12.048 12.048 6.635 0 12.048-5.413 12.048-12.048C24.096 5.408 18.683 0 12.048 0zm6.92 14.887c-.12 1.34-1.34 2.37-3.078 2.417-2.288.106-7.85-2.26-7.85-2.26s-1.045-3.02-1.045-4.81c0-1.848.74-2.828 2.08-2.828 1.487 0 1.95.897 1.95 2.247v1.86c0 1.34.897 2.155 2.155 2.155s2.155-.815 2.155-2.155v-1.86c0-1.35.463-2.247 1.95-2.247 1.34 0 2.08.98 2.08 2.828 0 1.79-.815 3.475-1.045 4.81-.23.47-1.15.545-1.15.545z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h6 class="text-lg font-semibold mb-4 text-primary">Về chúng tôi</h6>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="mqd.html" class="hover:text-white transition-colors">Trang chủ</a></li>
+                        <li><a href="gioithieu.html" class="hover:text-white transition-colors">Giới thiệu</a></li>
+                        <li><a href="mqd1.html" class="hover:text-white transition-colors">Sản phẩm</a></li>
+                        <li><a href="tintuc.html" class="hover:text-white transition-colors">Tin tức</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-primary">Danh Mục</h3>
+                    <ul class="space-y-2">
+                        <li><a href="mqd1.html#kem" class="text-gray-400 hover:text-white transition-colors">Bánh Kem</a></li>
+                        <li><a href="mqd1.html#ngot" class="text-gray-400 hover:text-white transition-colors">Bánh Ngọt</a></li>
+                        <li><a href="mqd1.html#quy" class="text-gray-400 hover:text-white transition-colors">Bánh Quy</a></li>
+                        <li><a href="mqd.html#sp" class="text-gray-400 hover:text-white transition-colors">Sản phẩm nổi bật</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-2 md:col-span-1">
+                    <h6 class="text-lg font-semibold mb-4 text-primary">Tải ứng dụng</h6>
+                    <a href="#" class="inline-block"><img src="media/ggpl.png" alt="Google Play" class="h-12 w-auto"></a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-6 text-center text-gray-400">
+                <p>&copy; 2024 BAKERY SHOP. Phiên bản 1.7.7</p>
+                <div class="mt-2 text-sm space-x-4">
+                    <a href="#!" class="hover:text-white transition-colors">Sự nghiệp</a>
+                    <a href="#!" class="hover:text-white transition-colors">Quyền lợi khách hàng</a>
+                    <span class="text-red-500 font-semibold block sm:inline-block">Liên hệ chúng tôi 1900 1234</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<script>
+  // Khi nhấn nút tìm kiếm hoặc Enter, chuyển hướng sang trang tìm kiếm với từ khóa
+  function goToSearch() {
+    const keyword = document.getElementById('searchInput').value.trim();
+    if (keyword) {
+      window.location.href = 'mqd1.html?search=' + encodeURIComponent(keyword);
+    }
+  }
+  document.getElementById('searchBtn').addEventListener('click', goToSearch);
+  document.getElementById('searchInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      goToSearch();
+    }
+  });
+</script>
+</body>
+</html>

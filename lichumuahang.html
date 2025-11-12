@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Lịch sử mua hàng - BAKERY SHOP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dinhdang.css">
+    <style>
+        body { font-family: 'Geist', sans-serif; }
+        .bg-primary { background-color: #8BC34A; }
+        .text-primary { color: #8BC34A; }
+        .banner-carousel {
+                position: relative;
+                width: 100%;
+                height: auto; 
+                overflow: hidden;
+            }
+            .banner-carousel a {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                animation: banner-fade 10s infinite;
+            }
+            .banner-carousel a:nth-child(1) {
+                animation-delay: 0s;
+                position: relative; 
+            }
+            .banner-carousel a:nth-child(2) {
+                animation-delay: 5s;
+                position: absolute; 
+            }
+            .banner-carousel a img {
+                width: 100%;
+                height: auto; 
+                object-fit: unset; 
+                display: block; 
+            }
+            @keyframes banner-fade {
+                0% { opacity: 1; }  
+                40% { opacity: 1; } 
+                50% { opacity: 0; } 
+                100% { opacity: 0; }
+            }
+    </style>
+</head>
+<body class="bg-stone-50">
+    <header class="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
+      <div class="container mx-auto flex h-16 items-center justify-between px-4">
+        <a href="mqd.html" class="flex items-center space-x-2">
+          <span class="text-2xl font-bold text-[#8BC34A]">BAKERY SHOP</span>
+        </a>
+
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="gioithieu.html" class="text-sm font-medium hover:text-[#8BC34A] transition-colors">
+            Giới thiệu
+          </a>
+          <a href="mqd1.html" class="text-sm font-medium hover:text-[#8BC34A] transition-colors">
+            Sản phẩm
+          </a>
+          <a href="https://tljus.com/" class="text-sm font-medium hover:text-[#8BC34A] transition-colors">
+            Tin tức
+          </a>
+          <a href="dangnhap.html" class="text-sm font-medium hover:text-[#8BC34A] transition-colors">
+            Đăng nhập
+          </a>
+          <a href="danhgia.html" class="text-sm font-medium hover:text-[#8BC34A] transition-colors">
+            Đánh giá
+          </a>
+        </nav>
+
+        <div class="flex items-center space-x-4">
+          <input id="searchInput" type="text" placeholder="Nhập tên bánh..." class="border rounded px-2 py-1 mr-2 focus:outline-none focus:ring-2 focus:ring-[#8BC34A] transition" style="width: 180px;">
+          <button id="searchBtn" class="p-2 hover:bg-gray-100 rounded-full transition-colors" title="Tìm kiếm">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </button>
+          <a href="giohang.html" class="p-2 hover:bg-gray-100 rounded-full transition-colors relative inline-block">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+            <span class="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-red-500 text-[10px] font-bold text-white flex items-center justify-center">
+              0
+            </span>
+          </a>
+        </div>
+      </div>
+    </header>
+     <div class="banner-carousel">
+        <a href="https://www.figma.com/design/3phe4xZitJBFNLuEK2TUNR/banner?node-id=0-1&t=ZVVgYviPSUoW3TJb-1">
+            <img src="media/banner.png" alt="banner 1" loading="lazy">
+        </a>
+        <a href="https://www.figma.com/design/3phe4xZitJBFNLuEK2TUNR/banner?node-id=0-1&t=ZVVgYviPSUoW3TJb-1">
+            <img src="media/banner1.jpg" alt="banner 2" loading="lazy">
+        </a>
+    </div>
+    <div class="max-w-5xl mx-auto px-4 py-12">
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="p-6 sm:p-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Lịch sử Đơn hàng</h1>
+                <div class="overflow-x-auto">
+                    <table class="w-full min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Mã Đơn</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Sản Phẩm</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">Số Lượng</th>
+                                <th scope="col" class="px-6 py-3 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">Tổng Tiền</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">Trạng Thái</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#1001</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">Bánh kem Choco Tiger</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">2</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-semibold text-right">640.000₫</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
+                                    <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                        Chờ xác nhận
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                    <button class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition shadow-sm">Hủy đơn</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#1000</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">Bánh kem Rainbow Magic</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">1</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-semibold text-right">180.000₫</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
+                                    <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        Đã giao
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium space-x-2">
+                                    <a href="danhgia.html" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition shadow-sm">Đánh giá</a>
+                                    <button class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition shadow-sm">In hóa đơn</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="col-span-2 md:col-span-1">
+                    <img src="media/loo.jpg" alt="Bakery Logo" class="w-16 h-16 mb-4 rounded-full">
+                    <p class="text-xl font-bold mb-4">BAKERY SHOP</p>
+                    <div class="flex gap-4">
+                        <a href="https://www.facebook.com/TaiBakeryShophi/?locale=vi_VN" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24h11.496v-9.294H9.692v-3.622h3.129V8.404c0-3.1 1.894-4.785 4.658-4.785 1.325 0 2.472.098 2.8.142v3.23l-1.918.001c-1.502 0-1.792.715-1.792 1.777v2.333h3.621l-.47 3.622h-3.15V24h6.071c.732 0 1.325-.593 1.325-1.325V1.325C24 .593 23.407 0 22.675 0z"/></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c6.627 0 12 5.373 12 12s-5.373 12-12 12S0 18.627 0 12 5.373 0 12 0zm5.723 18.47a4.996 4.996 0 01-3.64.915 5.002 5.002 0 01-4.832-3.87 4.998 4.998 0 01-.194-2.822v-.002a5 5 0 015.021-4.912c.003 0 .006 0 .009 0h.019c.002 0 .004 0 .006 0a5 5 0 014.821 4.91c0 1.737-.872 3.327-2.31 4.257zM12.008 7.001a5.002 5.002 0 00-4.997 4.997v.002a5.001 5.001 0 004.997 4.997 5.001 5.001 0 004.997-4.999 5.001 5.001 0 00-4.997-4.997z"/></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.048 0C5.408 0 0 5.408 0 12.048c0 6.635 5.408 12.048 12.048 12.048 6.635 0 12.048-5.413 12.048-12.048C24.096 5.408 18.683 0 12.048 0zm6.92 14.887c-.12 1.34-1.34 2.37-3.078 2.417-2.288.106-7.85-2.26-7.85-2.26s-1.045-3.02-1.045-4.81c0-1.848.74-2.828 2.08-2.828 1.487 0 1.95.897 1.95 2.247v1.86c0 1.34.897 2.155 2.155 2.155s2.155-.815 2.155-2.155v-1.86c0-1.35.463-2.247 1.95-2.247 1.34 0 2.08.98 2.08 2.828 0 1.79-.815 3.475-1.045 4.81-.23.47-1.15.545-1.15.545z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h6 class="text-lg font-semibold mb-4 text-primary">Về chúng tôi</h6>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="mqd.html" class="hover:text-white transition-colors">Trang chủ</a></li>
+                        <li><a href="gioithieu.html" class="hover:text-white transition-colors">Giới thiệu</a></li>
+                        <li><a href="mqd1.html" class="hover:text-white transition-colors">Sản phẩm</a></li>
+                        <li><a href="tintuc.html" class="hover:text-white transition-colors">Tin tức</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-primary">Danh Mục</h3>
+                    <ul class="space-y-2">
+                        <li><a href="mqd1.html#kem" class="text-gray-400 hover:text-white transition-colors">Bánh Kem</a></li>
+                        <li><a href="mqd1.html#ngot" class="text-gray-400 hover:text-white transition-colors">Bánh Ngọt</a></li>
+                        <li><a href="mqd1.html#quy" class="text-gray-400 hover:text-white transition-colors">Bánh Quy</a></li>
+                        <li><a href="mqd.html#sp" class="text-gray-400 hover:text-white transition-colors">Sản phẩm nổi bật</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-2 md:col-span-1">
+                    <h6 class="text-lg font-semibold mb-4 text-primary">Tải ứng dụng</h6>
+                    <a href="#" class="inline-block"><img src="media/ggpl.png" alt="Google Play" class="h-12 w-auto"></a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-6 text-center text-gray-400">
+                <p>&copy; 2024 BAKERY SHOP. Phiên bản 1.7.7</p>
+                <div class="mt-2 text-sm space-x-4">
+                    <a href="#!" class="hover:text-white transition-colors">Sự nghiệp</a>
+                    <a href="#!" class="hover:text-white transition-colors">Quyền lợi khách hàng</a>
+                    <span class="text-red-500 font-semibold block sm:inline-block">Liên hệ chúng tôi 1900 1234</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+<script>
+  // Khi nhấn nút tìm kiếm hoặc Enter, chuyển hướng sang trang tìm kiếm với từ khóa
+  function goToSearch() {
+    const keyword = document.getElementById('searchInput').value.trim();
+    if (keyword) {
+      window.location.href = 'mqd1.html?search=' + encodeURIComponent(keyword);
+    }
+  }
+  document.getElementById('searchBtn').addEventListener('click', goToSearch);
+  document.getElementById('searchInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      goToSearch();
+    }
+  });
+</script>
+<script src="script.js"></script>
+</body>
+</html>

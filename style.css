@@ -1,0 +1,399 @@
+body {
+    font-family: 'Geist', sans-serif;
+}
+
+.bg-primary {
+    background-color: #8BC34A; /* Light Green 500 */
+}
+
+.text-primary {
+    color: #8BC34A;
+}
+
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.price {
+    color: #e53e3e; /* Red 600 */
+    font-weight: 600;
+}
+
+.love-letter-banner {
+    background-color: #fcf8f6;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fcebe1' fill-opacity='0.4'%3E%3Cpath d='M36 34h-4c-1.105 0-2-.896-2-2V2c0-1.105.895-2 2-2h4a2 2 0 0 1 2 2v30c0 1.105-.895 2-2 2zM36 34h-4c-1.105 0-2-.896-2-2V2c0-1.105.895-2 2-2h4a2 2 0 0 1 2 2v30c0 1.105-.895 2-2 2zM12 34h-4c-1.105 0-2-.896-2-2V2c0-1.105.895-2 2-2h4a2 2 0 0 1 2 2v30c0 1.105-.895 2-2 2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    padding: 6rem 0;
+}
+
+.banner-carousel {
+    position: relative;
+    width: 100%;
+    height: auto; 
+    overflow: hidden;
+}
+
+.banner-carousel a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    animation: banner-fade 10s infinite;
+}
+
+.banner-carousel a:nth-child(1) { animation-delay: 0s; position: relative; }
+.banner-carousel a:nth-child(2) { animation-delay: 5s; position: absolute; }
+
+.banner-carousel a img { width: 100%; height: auto; object-fit: unset; display: block; }
+
+@keyframes banner-fade {
+    0% { opacity: 1; }  
+    40% { opacity: 1; } 
+    50% { opacity: 0; } 
+    100% { opacity: 0; }
+}
+
+/* --- LOGIC HIỂN THỊ CHUNG --- */
+.product-radio, .news-radio { 
+    display: none; 
+}
+
+/* Ẩn các thẻ chi tiết theo mặc định */
+.product-detail, .tt-detail {
+    display: none;
+}
+
+/* Khi một radio được chọn (không phải radio reset '0'), ẩn lưới tương ứng */
+#bk1:checked ~ .bk-grid, #bk2:checked ~ .bk-grid, #bk3:checked ~ .bk-grid, #bk4:checked ~ .bk-grid,
+#bn1:checked ~ .bn-grid, #bn2:checked ~ .bn-grid, #bn3:checked ~ .bn-grid, #bn4:checked ~ .bn-grid,
+#sp1:checked ~ .sp-grid, #sp2:checked ~ .sp-grid, #sp3:checked ~ .sp-grid, #sp4:checked ~ .sp-grid,
+#tt1:checked ~ .tt-grid, #tt2:checked ~ .tt-grid, #tt3:checked ~ .tt-grid, #tt4:checked ~ .tt-grid {
+    display: none;
+}
+
+/* Khi một radio được chọn (không phải radio reset '0'), hiển thị chi tiết tương ứng */
+#bk1:checked ~ .bk-details .product-detail[id="bk-detail1"],
+#bk2:checked ~ .bk-details .product-detail[id="bk-detail2"],
+#bk3:checked ~ .bk-details .product-detail[id="bk-detail3"],
+#bk4:checked ~ .bk-details .product-detail[id="bk-detail4"],
+#bn1:checked ~ .bn-details .product-detail[id="bn-detail1"],
+#bn2:checked ~ .bn-details .product-detail[id="bn-detail2"],
+#bn3:checked ~ .bn-details .product-detail[id="bn-detail3"],
+#bn4:checked ~ .bn-details .product-detail[id="bn-detail4"],
+#sp1:checked ~ .sp-details .product-detail[id="sp-detail1"],
+#sp2:checked ~ .sp-details .product-detail[id="sp-detail2"],
+#sp3:checked ~ .sp-details .product-detail[id="sp-detail3"],
+#sp4:checked ~ .sp-details .product-detail[id="sp-detail4"],
+#tt1:checked ~ .tt-details #tt-detail1,
+#tt2:checked ~ .tt-details #tt-detail2,
+#tt3:checked ~ .tt-details #tt-detail3,
+#tt4:checked ~ .tt-details #tt-detail4 {
+    display: block;
+}
+
+/* --- KIỂU DÁNG LỚP PHỦ (OVERLAY) CHO SẢN PHẨM --- */
+/* Khi một radio sản phẩm được chọn, khóa cuộn của body */
+body:has(.product-radio:checked:not([id$="0"])) {
+    overflow: hidden;
+}
+
+/* Container lớp phủ toàn màn hình cho chi tiết sản phẩm */
+.product-detail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Tăng độ mờ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+    /* Thêm hiệu ứng xuất hiện */
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Hộp nội dung màu trắng bên trong lớp phủ */
+.product-detail-content {
+    max-width: 400px;
+    width: 90%;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    padding: 32px 24px;
+    text-align: center;
+    position: relative;
+}
+
+/* --- KIỂU DÁNG CHO TIN TỨC (TRONG LUỒNG TRANG) --- */
+.tt-detail {
+    max-width: 600px; /* From tintuc.html */
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    padding: 32px 24px;
+    text-align: center;
+    position: relative;
+}
+
+/* --- KIỂU DÁNG CÁC THÀNH PHẦN BÊN TRONG --- */
+/* Hình ảnh cho sản phẩm */
+.product-detail-content img {
+    width: 260px;
+    height: 200px;
+    object-fit: contain;
+    margin: 0 auto 20px;
+    border-radius: 16px;
+    background: #f8fafc;
+    padding: 12px;
+}
+
+/* Ghi đè hình ảnh cho tin tức */
+.tt-detail img {
+    width: 100%;
+    max-width: 400px;
+    height: 220px;
+    object-fit: cover;
+    margin: 0 auto 20px;
+    border-radius: 16px;
+    background: #f8fafc;
+    padding: 12px;
+}
+
+/* Nút quay lại chung */
+.product-detail-content .back-btn,
+.tt-detail .back-btn {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    background: #f3f3f3;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: #8BC34A;
+    transition: background 0.2s;
+}
+
+.product-detail-content .back-btn:hover, .tt-detail .back-btn:hover {
+    background: #e0e0e0;
+}
+
+/* Các nút mua hàng */
+.buy-btn, .add-cart-btn {
+    margin-top: 24px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.buy-btn {
+    background: #8BC34A;
+    color: #fff;
+    margin-right: 10px;
+}
+.buy-btn:hover { background: #689f38; }
+
+.add-cart-btn {
+    background: #fff;
+    color: #8BC34A;
+    border: 2px solid #8BC34A;
+}
+.add-cart-btn:hover {
+    background: #f3f3f3;
+    color: #689f38;
+}
+
+/* --- Logic hiển thị chi tiết sản phẩm/tin tức --- */
+.product-radio, .news-radio { 
+    display: none; 
+}
+
+/* Ẩn các thẻ chi tiết theo mặc định */
+.bk-detail, .bn-detail, .sp-detail, .tt-detail {
+    display: none;
+}
+
+/* --- Logic hiển thị/ẩn lưới và chi tiết --- */
+/* Khi một radio được chọn, ẩn lưới tương ứng */
+#bk1:checked ~ .bk-grid, #bk2:checked ~ .bk-grid, #bk3:checked ~ .bk-grid, #bk4:checked ~ .bk-grid,
+#bn1:checked ~ .bn-grid, #bn2:checked ~ .bn-grid, #bn3:checked ~ .bn-grid, #bn4:checked ~ .bn-grid,
+#sp1:checked ~ .sp-grid, #sp2:checked ~ .sp-grid, #sp3:checked ~ .sp-grid, #sp4:checked ~ .sp-grid,
+#tt1:checked ~ .tt-grid, #tt2:checked ~ .tt-grid, #tt3:checked ~ .tt-grid, #tt4:checked ~ .tt-grid {
+    display: none;
+}
+
+/* Khi một radio được chọn, hiển thị chi tiết tương ứng */
+#bk1:checked ~ .bk-details #bk-detail1,
+#bk2:checked ~ .bk-details #bk-detail2,
+#bk3:checked ~ .bk-details #bk-detail3,
+#bk4:checked ~ .bk-details #bk-detail4,
+#bn1:checked ~ .bn-details #bn-detail1,
+#bn2:checked ~ .bn-details #bn-detail2,
+#bn3:checked ~ .bn-details #bn-detail3,
+#bn4:checked ~ .bn-details #bn-detail4,
+#sp1:checked ~ .sp-details #sp-detail1,
+#sp2:checked ~ .sp-details #sp-detail2,
+#sp3:checked ~ .sp-details #sp-detail3,
+#sp4:checked ~ .sp-details #sp-detail4,
+#tt1:checked ~ .tt-details #tt-detail1,
+#tt2:checked ~ .tt-details #tt-detail2,
+#tt3:checked ~ .tt-details #tt-detail3,
+#tt4:checked ~ .tt-details #tt-detail4 {
+    display: block;
+}
+
+/* --- Kiểu dáng lớp phủ (Overlay) --- */
+/* Khi một radio (không phải radio reset '0') được chọn, khóa cuộn của body */
+body:has(.product-radio:checked:not([id$="0"])),
+body:has(.news-radio:checked:not([id$="0"])) {
+    overflow: hidden;
+}
+
+/* Biến các thẻ chi tiết thành lớp phủ toàn màn hình */
+.bk-detail, .bn-detail, .sp-detail, .tt-detail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* --- Kiểu dáng thẻ nội dung bên trong lớp phủ --- */
+.detail-card {
+    max-width: 400px; /* Mặc định cho sản phẩm */
+    width: 90%;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    padding: 32px 24px;
+    text-align: center;
+    position: relative; /* Để nút back có thể định vị */
+    /* Quan trọng: đặt lại position để nó không bị ảnh hưởng bởi .bk-detail, .bn-detail... */
+    position: static; 
+    display: block;
+    background-color: transparent;
+    height: auto;
+    width: auto;
+    overflow-y: visible;
+    z-index: auto;
+    padding: 0;
+}
+
+/* Thẻ nội dung thực sự */
+.detail-card-content {
+    max-width: 400px; /* Mặc định cho sản phẩm */
+    width: 90%;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    padding: 32px 24px;
+    text-align: center;
+    position: relative;
+}
+
+/* Ghi đè cho chi tiết tin tức */
+.tt-detail .detail-card-content {
+    max-width: 600px;
+}
+
+/* --- Kiểu dáng các thành phần bên trong thẻ --- */
+.detail-card-content img {
+    width: 260px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    background: #f8fafc;
+    box-shadow: 0 2px 8px rgba(140,195,74,0.08);
+    padding: 12px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Ghi đè hình ảnh cho chi tiết tin tức */
+.tt-detail .detail-card-content img {
+    width: 100%;
+    max-width: 400px;
+    height: 220px;
+    object-fit: cover;
+}
+
+.detail-card-content .back-btn {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    background: #f3f3f3;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: #8BC34A;
+    transition: background 0.2s;
+}
+
+.detail-card-content .back-btn:hover {
+    background: #e0e0e0;
+}
+
+.buy-btn, .add-cart-btn {
+    margin-top: 24px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.buy-btn {
+    background: #8BC34A;
+    color: #fff;
+    margin-right: 10px;
+}
+.buy-btn:hover { background: #689f38; }
+
+.add-cart-btn {
+    background: #fff;
+    color: #8BC34A;
+    border: 2px solid #8BC34A;
+}
+.add-cart-btn:hover {
+    background: #f3f3f3;
+    color: #689f38;
+}

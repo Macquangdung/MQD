@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng ký tài khoản</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-stone-50">
+  <header class="sticky top-0 z-50 w-full border-b bg-white">
+    <div class="container mx-auto flex h-16 items-center justify-between px-4">
+      <a href="/" class="flex items-center space-x-2">
+        <span class="text-2xl font-bold text-[#8BC34A]">BAKERY SHOP</span>
+      </a>
+
+      <div class="flex items-center space-x-4">
+        <input id="searchInput" type="text" placeholder="Nhập tên bánh..." class="border rounded px-2 py-1 mr-2 focus:outline-none focus:ring-2 focus:ring-[#8BC34A] transition" style="width: 180px;">
+        <button id="searchBtn" class="p-2 hover:bg-gray-100 rounded-full transition-colors" title="Tìm kiếm">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </button>
+                <a href="giohang.html" class="p-2 hover:bg-gray-100 rounded-full transition-colors relative inline-block">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                    <span class="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-red-500 text-[10px] font-bold text-white flex items-center justify-center">
+                        0
+                    </span>
+                </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-md mx-auto px-4 py-8">
+    <div class="bg-white rounded-lg shadow-md">
+      <div class="px-6 py-4 bg-primary text-white border-t-4 border-primary">
+        <h4 class="text-xl font-semibold text-center">Đăng ký tài khoản</h4>
+      </div>
+      <div class="p-6">
+        <form name="formDangKy" method="post" action="" class="space-y-4">
+          <div>
+            <label for="tendangnhap" class="block text-sm font-medium text-gray-700 mb-1">Tên đăng nhập</label>
+            <input type="text" name="tendangnhap" maxlength="35" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary">
+          </div>
+
+          <div>
+            <label for="matkhau" class="block text-sm font-medium text-gray-700 mb-1">Mật khẩu</label>
+            <input type="password" name="matkhau" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary">
+          </div>
+
+          <div>
+            <label for="nhapmatkhau" class="block text-sm font-medium text-gray-700 mb-1">Nhập lại mật khẩu</label>
+            <input type="password" name="nhapmatkhau" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary">
+          </div>
+
+          <div>
+            <label for="sdt" class="block text-sm font-medium text-gray-700 mb-1">Số điện thoại</label>
+            <input type="text" name="sdt" maxlength="10" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary">
+          </div>
+
+          <button type="submit" class="w-full bg-primary text-white py-2 rounded-md hover:bg-green-600 transition-colors">Đăng ký</button>
+        </form>
+      </div>
+      <div class="px-6 py-4 border-t text-center text-sm">
+        <small>Đã có tài khoản? <a href="dangnhap.html" class="text-primary hover:underline">Đăng nhập</a></small>
+      </div>
+    </div>
+  </div>
+<script src="script.js"></script>
+</body>
+</html>
