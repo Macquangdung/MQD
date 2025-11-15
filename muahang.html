@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JM Clothing - Mua Hàng</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">JM Clothing</div>
+            <ul class="menu">
+                <li><a href="trangchu.html">Trang Chủ</a></li>
+                <li><a href="sanpham.html">Sản Phẩm</a></li>
+                <li><a href="gioithieu.html">Giới Thiệu</a></li>
+                <li><a href="dangnhap.html">Đăng Nhập</a></li>
+                <li><a href="dangky.html">Đăng Ký</a></li>
+                <li><a href="giohang.html">Giỏ Hàng</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section style="padding: 2rem;">
+            <h2>Thanh Toán</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                <div>
+                    <h3>Thông Tin Giao Hàng</h3>
+                    <form style="background-color: #fff; padding: 1rem; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <div class="form-group">
+                            <label for="fullname">Họ và tên:</label>
+                            <input type="text" id="fullname" name="fullname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại:</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Địa chỉ:</label>
+                            <textarea id="address" name="address" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="note">Ghi chú:</label>
+                            <textarea id="note" name="note"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <h3>Đơn Hàng Của Bạn</h3>
+                    <div style="background-color: #fff; padding: 1rem; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <p>Áo Thun Nam - 250.000 VND</p>
+                        <p>Váy Nữ (x2) - 700.000 VND</p>
+                        <hr>
+                        <p><strong>Tổng Cộng: 950.000 VND</strong></p>
+                        <h4>Phương Thức Thanh Toán</h4>
+                        <div>
+                            <input type="radio" id="cod" name="payment" value="cod" checked>
+                            <label for="cod">Thanh toán khi nhận hàng</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="bank" name="payment" value="bank">
+                            <label for="bank">Chuyển khoản ngân hàng</label>
+                        </div>
+                        <a href="lichsumuahang.html"><button type="submit" class="btn" style="margin-top: 1rem;">Đặt Hàng</button></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Về Chúng Tôi</h4>
+                <ul class="footer-links">
+                    <li><a href="gioithieu.html">Giới Thiệu</a></li>
+                    <li><a href="danhgia.html">Đánh Giá</a></li>
+                    <li><a href="quenmk.html">Quên Mật Khẩu</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Khách Hàng</h4>
+                <ul class="footer-links">
+                    <li><a href="dangnhap.html">Đăng Nhập</a></li>
+                    <li><a href="dangky.html">Đăng Ký</a></li>
+                    <li><a href="lichsumuahang.html">Lịch Sử Mua Hàng</a></li>
+                    <li><a href="giohang.html">Giỏ Hàng</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Liên Hệ</h4>
+                <p>Email: info@jmclothing.vn</p>
+                <p>Điện thoại: 0123-456-789</p>
+                <p>Địa chỉ: 123 Đường ABC, TP.HCM</p>
+            </div>
+            <div class="footer-section">
+                <h4>Theo Dõi Chúng Tôi</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 JM Clothing. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+</body>
+</html>
